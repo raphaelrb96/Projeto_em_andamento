@@ -1,0 +1,17 @@
+{
+  "projects": {
+    "default": "remediorapido-203dd"
+  },
+  "targets": {
+    "remediorapido-203dd": {
+      "hosting": {
+        "farma": [
+          "farmafacil"
+        ],
+        "politicas": [
+          "remediorapido-203dd"
+        ]
+      }
+    }
+  }
+}
