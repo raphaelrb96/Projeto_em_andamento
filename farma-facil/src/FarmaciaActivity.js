@@ -7,11 +7,32 @@ let erro = error =>  {
 
 let elementoNavBottom;
 
-class BotaoFazerLogin extends React.Component {
+class MeuProgressBar extends React.Component {
 
 	render() {
 		return(
-			<button type="button" className="btn btn-danger">
+			<div className="progress meu-progress-bar">
+			    <div className="loading-pb progress-bar progress-bar-striped progress-bar-animated bg-success" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
+			</div>
+		);
+	}
+
+}
+
+class BotaoFazerLogin extends React.Component {
+
+	constructor(props) {
+		super(props);
+		this.abriLogin = this.abriLogin.bind(this);
+	}
+
+	abriLogin() {
+		window.location.assign('login.html');
+	}
+
+	render() {
+		return(
+			<button onClick={this.abriLogin} type="button" className="btn btn-danger">
 				<div className="font-weight-bold text-white">
 					Login/Cadastro
 				</div>
@@ -43,6 +64,7 @@ class SubMenuNavbottom extends React.Component {
 			            <a className="nav-link" href="#"><font className="vertical-alinhamento"><font className="vertical-alinhamento">(92) 992037915</font></font><span class="sr-only"><font className="vertical-alinhamento"><font className="vertical-alinhamento">(atual)</font></font></span></a>
 			          </li>
 			        </ul>
+			        <MeuSearchInput />
 			      </div>
 
 			</div>
@@ -70,6 +92,41 @@ class BotaoAbrirCarrinho extends React.Component {
 
 }
 
+class BannerTopo extends React.Component {
+
+	render(){
+		return(
+
+			<img className="rendimensionar" src="baner2.jpg"/>
+
+		);
+	}
+
+}
+
+class MeuSearchInput extends React.Component {
+
+	render() {
+
+		return(
+
+			<form className="form-inline mt-2 mt-md-0">
+	            <input className="form-control mr-sm-2" type="text" placeholder="Pesquisar produto" aria-label="Pesquisar produto"></input>
+	            <button className="btn btn-outline-light my-2 my-sm-0" type="submit">
+	            	<font className="vertical-alinhamento">
+	            		<font className="vertical-alinhamento">
+	            			Procurar
+	            		</font>
+	            	</font>
+	            </button>
+	        </form>
+
+		);
+
+	}
+
+}
+
 class NavbarInferior extends React.Component {
 
 	constructor(props) {
@@ -83,13 +140,25 @@ class NavbarInferior extends React.Component {
 
 	render() {
 		return(
-			<nav className="navbar fixed-bottom navbar-expand-sm navbar-dark p-3 mb-2 bg-secondary text-white">
+			<nav className="navbar fixed-bottom navbar-expand-sm navbar-dark p-3 mb-2 bg-secondary text-white sem-margim-bottom">
 				<a className="navbar-brand" href="#">
 					{elementoNavBottom}
 				</a>
-				<div className="font-weight-bold text-white m-top-8px">
-					WhatssApp >> (92) 992037915
-				</div>
+				<button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="true" aria-label="Toggle navigation">
+			        <span className="navbar-toggler-icon"></span>
+			      </button>
+			      <div className="navbar-collapse collapse show" id="navbarCollapse">
+			        <ul className="navbar-nav mr-auto">
+			          <li className="nav-item active">
+			            <a className="nav-link" href="#"><font className="vertical-alinhamento"><font className="vertical-alinhamento">WhatssApp:</font></font><span class="sr-only"><font className="vertical-alinhamento"><font className="vertical-alinhamento">(atual)</font></font></span></a>
+			          </li>
+			
+			          <li className="nav-item dropup show">
+			            <a className="nav-link" href="#"><font className="vertical-alinhamento"><font className="vertical-alinhamento">(92) 992037915</font></font><span class="sr-only"><font className="vertical-alinhamento"><font className="vertical-alinhamento">(atual)</font></font></span></a>
+			          </li>
+			        </ul>
+			        <MeuSearchInput />
+			      </div>
 			</nav>
 		);
 	}
@@ -237,6 +306,23 @@ class ImagemProduto extends React.Component {
 
 }
 
+let showPb = () => {
+	let element = <MeuProgressBar />
+	ReactDOM.render(
+		element,
+		document.getElementById('root')
+	);
+}
+
+let showInterfaceMain = (tamanho, prods, isAnonimo) => {
+	const element = <ConstruirLayout size={tamanho} produtos={prods} isAnonimo={isAnonimo} />
+
+	ReactDOM.render(
+		element,
+		document.getElementById('root')
+	);
+}
+
 let loginAnonimo = () => {
 	firebase.auth().signInAnonymously().catch(error => {
 	  // Handle Errors here.
@@ -261,6 +347,8 @@ class ConstruirLayout extends React.Component {
 
 		return(
 			<div>
+				<BannerTopo />
+				<hr/>
 				<GradeProdutos size={size} lista={lista} isAnonimo={isAnonimo} />
 				<NavbarInferior anonimo={isAnonimo} />
 			</div>
@@ -280,12 +368,7 @@ let updateInterface = (firebase, isAnonimo) => {
 			let tamanho = querySnapshot.size;
 
 
-			const element = <ConstruirLayout size={tamanho} produtos={prods} isAnonimo={isAnonimo} />
-
-			return ReactDOM.render(
-			  element,
-			  document.getElementById('root')
-			);
+			showInterfaceMain(tamanho, prods, isAnonimo);
 
 		})
 		.catch(error => {
@@ -294,7 +377,6 @@ let updateInterface = (firebase, isAnonimo) => {
 
 }
 
-loginAnonimo();
 
 firebase.auth().onAuthStateChanged(
 	user => {
@@ -325,3 +407,11 @@ firebase.auth().onAuthStateChanged(
 		loginAnonimo();
 	}
 );
+
+// Criacao da interface
+let onCreate = () => {
+	showPb();
+	loginAnonimo();
+}
+
+onCreate();

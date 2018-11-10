@@ -4,7 +4,8 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>FarmaFácil-Manaus</title>
+    
+    <title> </title>
 
     <!-- Bootstrap -->
      <link rel="stylesheet" href="bootstrap.min.css"  crossorigin="anonymous">
@@ -22,75 +23,51 @@
 
     <script src="/__/firebase/init.js"></script>
 
-
+    <script src="https://cdn.firebase.com/libs/firebaseui/3.1.1/firebaseui.js"></script>
+    <link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/3.1.1/firebaseui.css" />
+    <script src="https://www.gstatic.com/firebasejs/ui/3.4.1/firebase-ui-auth__pt.js"></script>
+    <link type="text/css" rel="stylesheet" href="https://www.gstatic.com/firebasejs/ui/3.4.1/firebase-ui-auth.css" />
 
     <style type="text/css">
         
-        .meu-progress-bar {
-            margin-top: 100px;
-            width: 50%;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        .loading-pb {
-            width: 75%;
-        }
-
-        .title-produto {
-            font-size: 28px;
-        }
-
-        .preco-produto {
-            font-size: 26px;
-        }
-
-        .container-produto-img {
-            width: 250px;
-            height: 250px;
-            display: block;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        .produto-img {
-            display: block;
-            margin-left: auto;
-            margin-right: auto;
-            max-width: 100%;
-            width: auto;
-            height: auto;
-            max-height: 250px;
-        }
-
-        .vertical-alinhamento {
+       .vertical-alinhamento {
 
             vertical-align: inherit;
+
 
         }
 
         .rendimensionar {
-            margin-top: 20px;
-            margin-bottom: 15px;
-            max-width: 70%;
+            max-width: 80%;
+            width: 300px;
             height: auto;
             display: block;
             margin-left: auto;
             margin-right: auto;
         }
 
-        .card-produto {
-            margin-top: 10px;
-            margin-bottom: 6px;
+        h4 {
+            max-width: 60%;
+            text-align: center;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            margin-bottom: 50px;
         }
 
-        .m-top-8px {
-            margin-top: 8px;
+        a {
+            text-align: center;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            color: #d9534f;
         }
 
-        .sem-margim-bottom {
-            margin-bottom: 0px;
-            padding-bottom: 0px;
+        .centralizar-text {
+            border: red;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
         }
 
     </style>
@@ -98,13 +75,36 @@
   </head>
 
   <body>
-
+<script>
+    window.fbAsyncInit = function() {
+    FB.init({
+      appId            : '1010408422494276',
+      autoLogAppEvents : true,
+      xfbml            : true,
+      version          : 'v3.2'
+    });
+  };
+  (function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = 'https://connect.facebook.net/pt_BR/sdk.js#xfbml=1&version=v3.2&appId=1010408422494276';
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));
+</script>
     <!-- COMPONETES E CONTAINERS -->
-    <div id="root">
-        
-    </div>
     <!-- !!! -->
-    
+    <div>
+        <img class="rendimensionar" src="capalogin.jpg">
+        <!-- <h4 class="text-secondary">Faça login para poder comprar no site</h4>
+        <p><em>
+            <a href="privacidade.html">Políticas de privacidade</a>
+        </em></p> -->
+        <div id="firebaseui-auth-container"></div>
+        
+      <!-- // <div onclick="loginFace()" className="fb-login-button" data-max-rows="1" data-size="large" data-button-type="continue_with" data-show-faces="true" data-auto-logout-link="true" data-use-continue-as="false"></div> -->
+
+    </div>
 
 
     <!-- Load React. -->
@@ -114,11 +114,8 @@
 
 
     <!-- LOGICA DO SITE -->
-    <script type="text/javascript" src="FarmaciaActivity.js">
-        
-
-
-    </script>
+    
+    <script type="text/javascript" src="LoginActivity.js"></script>
     <!-- !!! -->
 
     <!-- jQuery (obrigatório para plugins JavaScript do Bootstrap) -->

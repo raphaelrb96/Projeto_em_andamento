@@ -15,21 +15,52 @@ var erro = function erro(error) {
 
 var elementoNavBottom = void 0;
 
-var BotaoFazerLogin = function (_React$Component) {
-	_inherits(BotaoFazerLogin, _React$Component);
+var MeuProgressBar = function (_React$Component) {
+	_inherits(MeuProgressBar, _React$Component);
 
-	function BotaoFazerLogin() {
+	function MeuProgressBar() {
+		_classCallCheck(this, MeuProgressBar);
+
+		return _possibleConstructorReturn(this, (MeuProgressBar.__proto__ || Object.getPrototypeOf(MeuProgressBar)).apply(this, arguments));
+	}
+
+	_createClass(MeuProgressBar, [{
+		key: "render",
+		value: function render() {
+			return React.createElement(
+				"div",
+				{ className: "progress meu-progress-bar" },
+				React.createElement("div", { className: "loading-pb progress-bar progress-bar-striped progress-bar-animated bg-success", role: "progressbar", "aria-valuenow": "75", "aria-valuemin": "0", "aria-valuemax": "100" })
+			);
+		}
+	}]);
+
+	return MeuProgressBar;
+}(React.Component);
+
+var BotaoFazerLogin = function (_React$Component2) {
+	_inherits(BotaoFazerLogin, _React$Component2);
+
+	function BotaoFazerLogin(props) {
 		_classCallCheck(this, BotaoFazerLogin);
 
-		return _possibleConstructorReturn(this, (BotaoFazerLogin.__proto__ || Object.getPrototypeOf(BotaoFazerLogin)).apply(this, arguments));
+		var _this2 = _possibleConstructorReturn(this, (BotaoFazerLogin.__proto__ || Object.getPrototypeOf(BotaoFazerLogin)).call(this, props));
+
+		_this2.abriLogin = _this2.abriLogin.bind(_this2);
+		return _this2;
 	}
 
 	_createClass(BotaoFazerLogin, [{
+		key: "abriLogin",
+		value: function abriLogin() {
+			window.location.assign('login.html');
+		}
+	}, {
 		key: "render",
 		value: function render() {
 			return React.createElement(
 				"button",
-				{ type: "button", className: "btn btn-danger" },
+				{ onClick: this.abriLogin, type: "button", className: "btn btn-danger" },
 				React.createElement(
 					"div",
 					{ className: "font-weight-bold text-white" },
@@ -42,8 +73,8 @@ var BotaoFazerLogin = function (_React$Component) {
 	return BotaoFazerLogin;
 }(React.Component);
 
-var SubMenuNavbottom = function (_React$Component2) {
-	_inherits(SubMenuNavbottom, _React$Component2);
+var SubMenuNavbottom = function (_React$Component3) {
+	_inherits(SubMenuNavbottom, _React$Component3);
 
 	function SubMenuNavbottom() {
 		_classCallCheck(this, SubMenuNavbottom);
@@ -129,7 +160,8 @@ var SubMenuNavbottom = function (_React$Component2) {
 								)
 							)
 						)
-					)
+					),
+					React.createElement(MeuSearchInput, null)
 				)
 			);
 		}
@@ -138,8 +170,8 @@ var SubMenuNavbottom = function (_React$Component2) {
 	return SubMenuNavbottom;
 }(React.Component);
 
-var BotaoAbrirCarrinho = function (_React$Component3) {
-	_inherits(BotaoAbrirCarrinho, _React$Component3);
+var BotaoAbrirCarrinho = function (_React$Component4) {
+	_inherits(BotaoAbrirCarrinho, _React$Component4);
 
 	function BotaoAbrirCarrinho() {
 		_classCallCheck(this, BotaoAbrirCarrinho);
@@ -166,20 +198,76 @@ var BotaoAbrirCarrinho = function (_React$Component3) {
 	return BotaoAbrirCarrinho;
 }(React.Component);
 
-var NavbarInferior = function (_React$Component4) {
-	_inherits(NavbarInferior, _React$Component4);
+var BannerTopo = function (_React$Component5) {
+	_inherits(BannerTopo, _React$Component5);
+
+	function BannerTopo() {
+		_classCallCheck(this, BannerTopo);
+
+		return _possibleConstructorReturn(this, (BannerTopo.__proto__ || Object.getPrototypeOf(BannerTopo)).apply(this, arguments));
+	}
+
+	_createClass(BannerTopo, [{
+		key: "render",
+		value: function render() {
+			return React.createElement("img", { className: "rendimensionar", src: "baner2.jpg" });
+		}
+	}]);
+
+	return BannerTopo;
+}(React.Component);
+
+var MeuSearchInput = function (_React$Component6) {
+	_inherits(MeuSearchInput, _React$Component6);
+
+	function MeuSearchInput() {
+		_classCallCheck(this, MeuSearchInput);
+
+		return _possibleConstructorReturn(this, (MeuSearchInput.__proto__ || Object.getPrototypeOf(MeuSearchInput)).apply(this, arguments));
+	}
+
+	_createClass(MeuSearchInput, [{
+		key: "render",
+		value: function render() {
+
+			return React.createElement(
+				"form",
+				{ className: "form-inline mt-2 mt-md-0" },
+				React.createElement("input", { className: "form-control mr-sm-2", type: "text", placeholder: "Pesquisar produto", "aria-label": "Pesquisar produto" }),
+				React.createElement(
+					"button",
+					{ className: "btn btn-outline-light my-2 my-sm-0", type: "submit" },
+					React.createElement(
+						"font",
+						{ className: "vertical-alinhamento" },
+						React.createElement(
+							"font",
+							{ className: "vertical-alinhamento" },
+							"Procurar"
+						)
+					)
+				)
+			);
+		}
+	}]);
+
+	return MeuSearchInput;
+}(React.Component);
+
+var NavbarInferior = function (_React$Component7) {
+	_inherits(NavbarInferior, _React$Component7);
 
 	function NavbarInferior(props) {
 		_classCallCheck(this, NavbarInferior);
 
-		var _this4 = _possibleConstructorReturn(this, (NavbarInferior.__proto__ || Object.getPrototypeOf(NavbarInferior)).call(this, props));
+		var _this7 = _possibleConstructorReturn(this, (NavbarInferior.__proto__ || Object.getPrototypeOf(NavbarInferior)).call(this, props));
 
-		if (_this4.props.anonimo) {
+		if (_this7.props.anonimo) {
 			elementoNavBottom = React.createElement(BotaoFazerLogin, null);
 		} else {
 			elementoNavBottom = React.createElement(BotaoAbrirCarrinho, null);
 		}
-		return _this4;
+		return _this7;
 	}
 
 	_createClass(NavbarInferior, [{
@@ -187,16 +275,85 @@ var NavbarInferior = function (_React$Component4) {
 		value: function render() {
 			return React.createElement(
 				"nav",
-				{ className: "navbar fixed-bottom navbar-expand-sm navbar-dark p-3 mb-2 bg-secondary text-white" },
+				{ className: "navbar fixed-bottom navbar-expand-sm navbar-dark p-3 mb-2 bg-secondary text-white sem-margim-bottom" },
 				React.createElement(
 					"a",
 					{ className: "navbar-brand", href: "#" },
 					elementoNavBottom
 				),
 				React.createElement(
+					"button",
+					{ className: "navbar-toggler", type: "button", "data-toggle": "collapse", "data-target": "#navbarCollapse", "aria-controls": "navbarCollapse", "aria-expanded": "true", "aria-label": "Toggle navigation" },
+					React.createElement("span", { className: "navbar-toggler-icon" })
+				),
+				React.createElement(
 					"div",
-					{ className: "font-weight-bold text-white m-top-8px" },
-					"WhatssApp >> (92) 992037915"
+					{ className: "navbar-collapse collapse show", id: "navbarCollapse" },
+					React.createElement(
+						"ul",
+						{ className: "navbar-nav mr-auto" },
+						React.createElement(
+							"li",
+							{ className: "nav-item active" },
+							React.createElement(
+								"a",
+								{ className: "nav-link", href: "#" },
+								React.createElement(
+									"font",
+									{ className: "vertical-alinhamento" },
+									React.createElement(
+										"font",
+										{ className: "vertical-alinhamento" },
+										"WhatssApp:"
+									)
+								),
+								React.createElement(
+									"span",
+									{ "class": "sr-only" },
+									React.createElement(
+										"font",
+										{ className: "vertical-alinhamento" },
+										React.createElement(
+											"font",
+											{ className: "vertical-alinhamento" },
+											"(atual)"
+										)
+									)
+								)
+							)
+						),
+						React.createElement(
+							"li",
+							{ className: "nav-item dropup show" },
+							React.createElement(
+								"a",
+								{ className: "nav-link", href: "#" },
+								React.createElement(
+									"font",
+									{ className: "vertical-alinhamento" },
+									React.createElement(
+										"font",
+										{ className: "vertical-alinhamento" },
+										"(92) 992037915"
+									)
+								),
+								React.createElement(
+									"span",
+									{ "class": "sr-only" },
+									React.createElement(
+										"font",
+										{ className: "vertical-alinhamento" },
+										React.createElement(
+											"font",
+											{ className: "vertical-alinhamento" },
+											"(atual)"
+										)
+									)
+								)
+							)
+						)
+					),
+					React.createElement(MeuSearchInput, null)
 				)
 			);
 		}
@@ -205,8 +362,8 @@ var NavbarInferior = function (_React$Component4) {
 	return NavbarInferior;
 }(React.Component);
 
-var LinhaGrade = function (_React$Component5) {
-	_inherits(LinhaGrade, _React$Component5);
+var LinhaGrade = function (_React$Component8) {
+	_inherits(LinhaGrade, _React$Component8);
 
 	function LinhaGrade() {
 		_classCallCheck(this, LinhaGrade);
@@ -219,8 +376,6 @@ var LinhaGrade = function (_React$Component5) {
 		value: function render() {
 
 			var doc = this.props.doc;
-
-			console.log(doc[0].get('imgCapa'));
 
 			return React.createElement(
 				"div",
@@ -236,8 +391,8 @@ var LinhaGrade = function (_React$Component5) {
 	return LinhaGrade;
 }(React.Component);
 
-var GradeProdutos = function (_React$Component6) {
-	_inherits(GradeProdutos, _React$Component6);
+var GradeProdutos = function (_React$Component9) {
+	_inherits(GradeProdutos, _React$Component9);
 
 	function GradeProdutos() {
 		_classCallCheck(this, GradeProdutos);
@@ -272,8 +427,6 @@ var GradeProdutos = function (_React$Component6) {
 				}
 			});
 
-			console.log(listaFormatada);
-
 			var elemento = listaFormatada.map(function (docs) {
 				return React.createElement(
 					"div",
@@ -293,8 +446,8 @@ var GradeProdutos = function (_React$Component6) {
 	return GradeProdutos;
 }(React.Component);
 
-var CardItemProduto = function (_React$Component7) {
-	_inherits(CardItemProduto, _React$Component7);
+var CardItemProduto = function (_React$Component10) {
+	_inherits(CardItemProduto, _React$Component10);
 
 	function CardItemProduto() {
 		_classCallCheck(this, CardItemProduto);
@@ -334,8 +487,8 @@ var CardItemProduto = function (_React$Component7) {
 	return CardItemProduto;
 }(React.Component);
 
-var DadosItemProduto = function (_React$Component8) {
-	_inherits(DadosItemProduto, _React$Component8);
+var DadosItemProduto = function (_React$Component11) {
+	_inherits(DadosItemProduto, _React$Component11);
 
 	function DadosItemProduto() {
 		_classCallCheck(this, DadosItemProduto);
@@ -380,8 +533,8 @@ var DadosItemProduto = function (_React$Component8) {
 	return DadosItemProduto;
 }(React.Component);
 
-var ImagemProduto = function (_React$Component9) {
-	_inherits(ImagemProduto, _React$Component9);
+var ImagemProduto = function (_React$Component12) {
+	_inherits(ImagemProduto, _React$Component12);
 
 	function ImagemProduto() {
 		_classCallCheck(this, ImagemProduto);
@@ -404,6 +557,17 @@ var ImagemProduto = function (_React$Component9) {
 	return ImagemProduto;
 }(React.Component);
 
+var showPb = function showPb() {
+	var element = React.createElement(MeuProgressBar, null);
+	ReactDOM.render(element, document.getElementById('root'));
+};
+
+var showInterfaceMain = function showInterfaceMain(tamanho, prods, isAnonimo) {
+	var element = React.createElement(ConstruirLayout, { size: tamanho, produtos: prods, isAnonimo: isAnonimo });
+
+	ReactDOM.render(element, document.getElementById('root'));
+};
+
 var loginAnonimo = function loginAnonimo() {
 	firebase.auth().signInAnonymously().catch(function (error) {
 		// Handle Errors here.
@@ -418,8 +582,8 @@ var loginAnonimo = function loginAnonimo() {
 	});
 };
 
-var ConstruirLayout = function (_React$Component10) {
-	_inherits(ConstruirLayout, _React$Component10);
+var ConstruirLayout = function (_React$Component13) {
+	_inherits(ConstruirLayout, _React$Component13);
 
 	function ConstruirLayout() {
 		_classCallCheck(this, ConstruirLayout);
@@ -438,6 +602,7 @@ var ConstruirLayout = function (_React$Component10) {
 			return React.createElement(
 				"div",
 				null,
+				React.createElement(BannerTopo, null),
 				React.createElement(GradeProdutos, { size: size, lista: lista, isAnonimo: isAnonimo }),
 				React.createElement(NavbarInferior, { anonimo: isAnonimo })
 			);
@@ -456,17 +621,11 @@ var updateInterface = function updateInterface(firebase, isAnonimo) {
 		var prods = querySnapshot.docs;
 		var tamanho = querySnapshot.size;
 
-		console.log(prods);
-
-		var element = React.createElement(ConstruirLayout, { size: tamanho, produtos: prods, isAnonimo: isAnonimo });
-
-		return ReactDOM.render(element, document.getElementById('root'));
+		showInterfaceMain(tamanho, prods, isAnonimo);
 	}).catch(function (error) {
 		erro(error.message);
 	});
 };
-
-loginAnonimo();
 
 firebase.auth().onAuthStateChanged(function (user) {
 	if (user) {
@@ -492,3 +651,11 @@ firebase.auth().onAuthStateChanged(function (user) {
 	// user saiu ou ocorreu algum erro
 	loginAnonimo();
 });
+
+// Criacao da interface
+var onCreate = function onCreate() {
+	showPb();
+	loginAnonimo();
+};
+
+onCreate();
