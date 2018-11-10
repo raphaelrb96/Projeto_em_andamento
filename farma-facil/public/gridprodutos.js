@@ -162,6 +162,4 @@ var ImagemProduto = function (_React$Component4) {
 	return ImagemProduto;
 }(React.Component);
 
-var element = React.createElement(GradeProdutos, null);
-
-ReactDOM.render(element, document.getElementById('root'));
+module.exports = GradeProdutos;

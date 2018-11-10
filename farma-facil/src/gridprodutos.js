@@ -2,6 +2,7 @@ class GradeProdutos extends React.Component {
 
 	render() {
 
+
 		return(
 
 			<div className="container">
@@ -115,10 +116,3 @@ class ImagemProduto extends React.Component {
 	}
 
 }
-
-const element = <GradeProdutos />
-
-ReactDOM.render(
-  element,
-  document.getElementById('root')
-);
