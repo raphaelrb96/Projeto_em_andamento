@@ -5,6 +5,51 @@ let erro = error =>  {
 	alert(error);
 }
 
+let showPb = () => {
+	let element = <MeuProgressBar />
+	ReactDOM.render(
+		element,
+		document.getElementById('root')
+	);
+}
+
+let abrirDetalhe = parametro => {
+	window.location = "detalhes.html?idProd="+parametro;
+}
+
+let listaProdutosPrincipal = Array();
+let mUser, mFirebase;
+
+let search = s => {
+	showPb();
+	const db = firebase.firestore();
+	let element;
+	db.settings({timestampsInSnapshots: true});
+	string = 'tag.' + s;
+	db.collection("produtos")
+		.where(string, '==', true)
+		.get()
+		.then(querySnapshot => {
+			let prods = querySnapshot.docs;
+			let tamanho = querySnapshot.size;
+
+			if (tamanho === 0) {
+				alert('Nenhum produto encontrado com esse nome');
+			}
+
+			querySnapshot.forEach(doc => {
+				listaProdutosPrincipal.unshift(doc);
+			});
+
+
+			showInterfaceMain(tamanho, listaProdutosPrincipal, mUser.isAnonymous);
+
+		})
+		.catch(error => {
+			erro(error.message);
+	});
+}
+
 let elementoNavBottom;
 
 class MeuProgressBar extends React.Component {
@@ -78,10 +123,24 @@ class SubMenuNavbottom extends React.Component {
 
 class BotaoAbrirCarrinho extends React.Component {
 
+	constructor(props) {
+		super(props);
+		this.verCompras = this.verCompras.bind(this);
+	}
+
+	verCompras() {
+		if (!mUser.isAnonymous) {
+			window.location.assign('comprar.html');
+		} else {
+			alert('Você precisa fazer login para acessar seu carrinho de compras');
+		}
+		
+	}
+
 	render() {
 
 		return(
-			<button type="button" class="btn btn-success">
+			<button onClick={this.verCompras} type="button" className="btn btn-success">
 				<div className="font-weight-bold text-white">
 					Carrinho/Compras
 				</div>
@@ -97,7 +156,7 @@ class BannerTopo extends React.Component {
 	render(){
 		return(
 
-			<img className="rendimensionar" src="baner2.jpg"/>
+			<img className="rendimensionar" src="baner_mini.jpg"/>
 
 		);
 	}
@@ -106,13 +165,26 @@ class BannerTopo extends React.Component {
 
 class MeuSearchInput extends React.Component {
 
+	constructor(props) {
+		super(props);
+		this.state = {
+	      data: [],
+	      texto: ''
+	    }
+		this.pesquisar = this.pesquisar.bind(this);
+	}
+
+	pesquisar() {
+		search(this.state.texto);
+	}
+
 	render() {
 
 		return(
 
 			<form className="form-inline mt-2 mt-md-0">
-	            <input className="form-control mr-sm-2" type="text" placeholder="Pesquisar produto" aria-label="Pesquisar produto"></input>
-	            <button className="btn btn-outline-light my-2 my-sm-0" type="submit">
+	            <input className="form-control mr-sm-2" onInput={(e) => this.setState({texto: e.target.value})} type="text" placeholder="Pesquisar produto" aria-label="Pesquisar produto"></input>
+	            <button onClick={this.pesquisar} className="btn btn-outline-light my-2 my-sm-0" type="submit">
 	            	<font className="vertical-alinhamento">
 	            		<font className="vertical-alinhamento">
 	            			Procurar
@@ -131,14 +203,17 @@ class NavbarInferior extends React.Component {
 
 	constructor(props) {
 		super(props);
+
+
+	}
+
+
+	render() {
 		if (this.props.anonimo) {
 			elementoNavBottom = <BotaoFazerLogin />
 		} else {
 			elementoNavBottom = <BotaoAbrirCarrinho />
 		}
-	}
-
-	render() {
 		return(
 			<nav className="navbar fixed-bottom navbar-expand-sm navbar-dark p-3 mb-2 bg-secondary text-white sem-margim-bottom">
 				<a className="navbar-brand" href="#">
@@ -177,10 +252,10 @@ class LinhaGrade extends React.Component {
 
 			<div className="row justify-content-around">
 					
-				<CardItemProduto img={doc[0].get('imgCapa')} key={doc[0].get('idProduto')} name={doc[0].get('prodName')} valor={doc[0].get('prodValor')} descr={doc[0].get('descr')} />
-				<CardItemProduto img={doc[1].get('imgCapa')} key={doc[1].get('idProduto')} name={doc[1].get('prodName')} valor={doc[1].get('prodValor')} descr={doc[1].get('descr')} />
-				<CardItemProduto img={doc[2].get('imgCapa')} key={doc[2].get('idProduto')} name={doc[2].get('prodName')} valor={doc[2].get('prodValor')} descr={doc[2].get('descr')} />
-				<CardItemProduto img={doc[3].get('imgCapa')} key={doc[3].get('idProduto')} name={doc[3].get('prodName')} valor={doc[3].get('prodValor')} descr={doc[3].get('descr')} />
+				<CardItemProduto isAnonimo={this.props.isAnonimo} img={doc[0].get('imgCapa')} id={doc[0].get('idProduto')} name={doc[0].get('prodName')} valor={doc[0].get('prodValor')} descr={doc[0].get('descr')} />
+				<CardItemProduto isAnonimo={this.props.isAnonimo} img={doc[1].get('imgCapa')} id={doc[1].get('idProduto')} name={doc[1].get('prodName')} valor={doc[1].get('prodValor')} descr={doc[1].get('descr')} />
+				<CardItemProduto isAnonimo={this.props.isAnonimo} img={doc[2].get('imgCapa')} id={doc[2].get('idProduto')} name={doc[2].get('prodName')} valor={doc[2].get('prodValor')} descr={doc[2].get('descr')} />
+				<CardItemProduto isAnonimo={this.props.isAnonimo} img={doc[3].get('imgCapa')} id={doc[3].get('idProduto')} name={doc[3].get('prodName')} valor={doc[3].get('prodValor')} descr={doc[3].get('descr')} />
 
 			</div>
 
@@ -195,6 +270,7 @@ class GradeProdutos extends React.Component {
 
 		let size = this.props.size;
 		let lista = this.props.lista;
+		let isAnonimo = this.props.isAnonimo;
 
 		let listaLinha = Array();
 
@@ -209,7 +285,6 @@ class GradeProdutos extends React.Component {
 				itensListaLinha = 0;
 				listaFormatada.push(listaLinha);
 				listaLinha = Array();
-				console.log(listaLinha);
 			} else {
 				listaLinha.push(item);
 				itensListaLinha++;
@@ -217,7 +292,7 @@ class GradeProdutos extends React.Component {
 		});
 
 
-		let elemento = listaFormatada.map(docs => <div><LinhaGrade doc={docs}/></div> );
+		let elemento = listaFormatada.map(docs => <div><LinhaGrade isAnonimo={isAnonimo} doc={docs}/></div> );
 
 		return(
 
@@ -237,10 +312,10 @@ class CardItemProduto extends React.Component {
 
 	render() {
 
-		let img, key, descr, valor, name;
+		let img, id, descr, valor, name;
 
 		img = this.props.img;
-		key = this.props.key;
+		id = this.props.id;
 		descr = this.props.descr;
 		valor = this.props.valor;
 		name = this.props.name;
@@ -249,10 +324,10 @@ class CardItemProduto extends React.Component {
 
 			<div className="col-sm">
 
-				<div className="card card-product card-produto">
+				<div className="card card-product card-produto limite-card centro">
 				
 					<ImagemProduto img={img} />
-					<DadosItemProduto name={name} descr={descr} valor={valor} />
+					<DadosItemProduto idProduto={id} isAnonimo={this.props.isAnonimo} name={name} descr={descr} valor={valor} />
 
 				</div>
 
@@ -266,26 +341,58 @@ class CardItemProduto extends React.Component {
 
 class DadosItemProduto extends React.Component {
 
+	constructor(props) {
+		super(props);
+		this.verDetalhes = this.verDetalhes.bind(this);
+	}
+
+	verDetalhes() {
+		let id = this.props.idProduto;
+		abrirDetalhe(id);
+	}
+
 	render() {
 
-		let title, descr, valor;
+		let title, descr, valor, isAnonimo;
 		title = this.props.name;
 		descr = this.props.descr;
 		valor = this.props.valor;
+		isAnonimo = this.props.isAnonimo;
 
-		return(
+		if (isAnonimo) {
+
+			return(
 
 			<div className="card-body">
-				<h5 className="card-title title text-justify">{title}</h5>
+				<h5 className="card-title title">{title}</h5>
 				<p className="card-text">
 					{descr}
 				</p>
 				<h5 className="preco-produto text-success">
-					R$ {valor}
+					R$ {valor},00
 				</h5>
 			</div>
 
 		);
+
+		} else {
+
+			return(
+
+			<div className="card-body">
+				<h5 className="card-title title">{title}</h5>
+				<p className="card-text">
+					{descr}
+				</p>
+				<h5 className="preco-produto text-success">
+					R$ {valor},00
+				</h5>
+				<button onClick={this.verDetalhes} type="button" className="btn btn-outline-success centro botao-comprar centro">Comprar</button>
+			</div>
+
+		);
+
+		}
 
 	}
 	
@@ -306,13 +413,83 @@ class ImagemProduto extends React.Component {
 
 }
 
-let showPb = () => {
-	let element = <MeuProgressBar />
-	ReactDOM.render(
-		element,
-		document.getElementById('root')
-	);
+class NavegacaoTopo extends React.Component {
+
+	constructor(props) {
+		super(props);
+		this.medicamentos = this.medicamentos.bind(this);
+		this.suplementos = this.suplementos.bind(this);
+		this.perfumaria = this.perfumaria.bind(this);
+	}
+
+	medicamentos() {
+		abrirMedicamentos();
+	}
+
+	perfumaria() {
+		abrirPerfumaria();
+	}
+
+	suplementos() {
+		abrirSuplementos();
+	}
+
+	render() {
+		return(
+			<div className="nav-scroller py-1 mb-2">
+		        <nav className="nav d-flex justify-content-between">
+		        	
+		        		<a className="p-2 text-muted centro font-weight-bold c-pointer" onClick={this.medicamentos}>Medicamentos</a>
+		        	
+		        		<a className="p-2 text-muted centro font-weight-bold c-pointer" onClick={this.suplementos}>Suplementos</a>
+		        
+		        		<a className="p-2 text-muted centro font-weight-bold c-pointer" onClick={this.perfumaria}>Perfumaria</a>
+		        	
+		        </nav>
+	      	</div>
+		);
+	}
+
 }
+
+let atualizarListaProdutos = (firebase, isAnonimo, type) => {
+
+	showPb();
+
+	const db = firebase.firestore();
+	db.settings({timestampsInSnapshots: true});
+
+	db.collection("produtos")
+		.where("categoria", "==", type)
+		.limit(90)
+		.get()
+		.then(querySnapshot => {
+			let prods = querySnapshot.docs;
+			let tamanho = querySnapshot.size;
+
+			listaProdutosPrincipal = querySnapshot.docs;
+
+			showInterfaceMain(tamanho, listaProdutosPrincipal, isAnonimo);
+
+		})
+		.catch(error => {
+			erro(error.message);
+		});
+
+}
+
+let abrirMedicamentos = () => {
+	atualizarListaProdutos(mFirebase, mUser.isAnonymous, 1);
+}
+
+let abrirSuplementos = () => {
+	atualizarListaProdutos(mFirebase, mUser.isAnonymous, 2);
+}
+
+let abrirPerfumaria = () => {
+	atualizarListaProdutos(mFirebase, mUser.isAnonymous, 3);
+}
+
 
 let showInterfaceMain = (tamanho, prods, isAnonimo) => {
 	const element = <ConstruirLayout size={tamanho} produtos={prods} isAnonimo={isAnonimo} />
@@ -349,6 +526,8 @@ class ConstruirLayout extends React.Component {
 			<div>
 				<BannerTopo />
 				<hr/>
+				<NavegacaoTopo />
+				<hr/>
 				<GradeProdutos size={size} lista={lista} isAnonimo={isAnonimo} />
 				<NavbarInferior anonimo={isAnonimo} />
 			</div>
@@ -362,13 +541,17 @@ let updateInterface = (firebase, isAnonimo) => {
 	const db = firebase.firestore();
 	db.settings({timestampsInSnapshots: true});
 
-	db.collection("produtos").get()
+	db.collection("produtos")
+		.orderBy("nivel", "desc")
+		.limit(90)
+		.get()
 		.then(querySnapshot => {
 			let prods = querySnapshot.docs;
 			let tamanho = querySnapshot.size;
 
+			listaProdutosPrincipal = querySnapshot.docs;
 
-			showInterfaceMain(tamanho, prods, isAnonimo);
+			showInterfaceMain(tamanho, listaProdutosPrincipal, isAnonimo);
 
 		})
 		.catch(error => {
@@ -382,8 +565,10 @@ firebase.auth().onAuthStateChanged(
 	user => {
 	  if (user) {
 	    // User is signed in.
+	    mUser = user;
 	    try {
           let app = firebase.app();
+          mFirebase = firebase;
 
           if (user.isAnonymous) {
 		    	//usuario 'visitante', ou que ainda nao fez login
@@ -411,7 +596,9 @@ firebase.auth().onAuthStateChanged(
 // Criacao da interface
 let onCreate = () => {
 	showPb();
-	loginAnonimo();
+	//loginAnonimo();
 }
 
+
+//Criacao da logica
 onCreate();

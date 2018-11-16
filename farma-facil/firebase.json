@@ -1,39 +1,39 @@
 {
   "functions": {
     "predeploy": [
-      "npm --prefix \"$RESOURCE_DIR\" run lint"
-    ]
+    ],
+    "source": "functions"
   },
   "hosting": [
-      {
-        "target": "politicas",
-        "public": "public",
-        "ignore": [
-          "firebase.json",
-          "**/.*",
-          "**/node_modules/**"
-        ],
-        "rewrites": [
-           {
-            "source": "**",
-             "destination": "/index.html"
-          }
-        ]
-      },
-      {
-        "target": "farma",
-        "public": "public",
-        "ignore": [
-          "firebase.json",
-          "**/.*",
-          "**/node_modules/**"
-        ],
-        "rewrites": [
-           {
-            "source": "**",
-             "destination": "/farma.html"
-          }
-        ]
-      }
+    {
+      "target": "politicas",
+      "public": "public",
+      "ignore": [
+        "firebase.json",
+        "**/.*",
+        "**/node_modules/**"
+      ],
+      "rewrites": [
+        {
+          "source": "**",
+          "destination": "/index.html"
+        }
+      ]
+    },
+    {
+      "target": "farma",
+      "public": "public",
+      "ignore": [
+        "firebase.json",
+        "**/.*",
+        "**/node_modules/**"
+      ],
+      "rewrites": [
+        {
+          "source": "**",
+          "destination": "/farma.html"
+        }
+      ]
+    }
   ]
 }

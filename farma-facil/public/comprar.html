@@ -1,0 +1,190 @@
+<!doctype html>
+<html lang="pt-br">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <title>FarmaFácil</title>
+
+    <!-- Bootstrap -->
+     <link rel="stylesheet" href="bootstrap.min.css"  crossorigin="anonymous">
+
+    <script src="/__/firebase/5.5.2/firebase-app.js"></script>
+
+    <!-- Add additional services that you want to use -->
+    <script src="/__/firebase/5.5.2/firebase-auth.js"></script>
+    <script src="/__/firebase/5.5.2/firebase-firestore.js"></script>
+    <script src="/__/firebase/5.5.2/firebase-messaging.js"></script>
+    <script src="/__/firebase/5.5.2/firebase-functions.js"></script>
+
+    <!-- Comment out (or don't include) services that you don't want to use -->
+    <!-- <script src="/__/firebase/5.5.2/firebase-storage.js"></script> -->
+
+    <script src="/__/firebase/init.js"></script>
+
+    <style type="text/css">
+
+        .info {
+            margin: 20px;
+        }
+
+        .caixa-top {
+            margin-top: 10px 20px 10px 50px;
+        }
+
+        .bar-top {
+            margin-top: 40px;
+            margin-bottom: 30px;
+        }
+
+        .c-pointer {
+            margin: 10px;
+            cursor:pointer;
+            font-size: 50px;
+        }
+
+        .centro {
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .center-c {
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .tv-quantidade {
+            font-size: 50px;
+        }
+        
+        .margin-card {
+            margin-top: 20px;
+            margin-bottom: 10px;
+            max-width: 400px;
+            min-width: 300px;
+            margin-left: auto;
+            margin-right: auto;
+            display: block;
+        }
+
+        .photo {
+            max-width: 50%;
+            height: auto;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        h1 {
+            font-size: 26px;
+        }
+
+
+        .meu-progress-bar {
+            margin-top: 100px;
+            width: 50%;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .loading-pb {
+            width: 75%;
+        }
+
+        .margin-taxa-entrega {
+            margin-top: 30px;
+            margin-bottom: 40px;
+        }
+
+        .forma-pagamento {
+            margin-bottom: 40px;
+            margin-top: 10px;
+        }
+
+        .top-60 {
+            margin-top: 30px;
+            margin-left: 10px;
+            margin-right: 10px;
+        }
+       
+
+    </style>
+
+  </head>
+
+  <body>
+
+    <!-- COMPONETES E CONTAINERS -->
+
+
+    <div class="modal fade" id="comprasModal" tabindex="-1" role="dialog" aria-labelledby="comprasModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="comprasModalLabel">Endereço e Dados Principais</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <form>
+              <div class="form-group">
+                <label for="recipient-name" class="col-form-label">Insira seu CEP:</label>
+                <input type="text" class="form-control" id="recipient-cep">
+              </div>
+              <div class="form-group">
+                <label for="recipient-name" class="col-form-label">Insira sua Rua:</label>
+                <input type="text" class="form-control" id="recipient-rua">
+              </div>
+              <div class="form-group">
+                <label for="recipient-name" class="col-form-label">Insira seu Bairro:</label>
+                <input type="text" class="form-control" id="recipient-bairro">
+              </div>
+              <div class="form-group">
+                <label for="recipient-name" class="col-form-label">Insira o Número da sua Casa:</label>
+                <input type="text" class="form-control" id="recipient-n-casa">
+              </div>
+              <div class="form-group">
+                <label for="recipient-name" class="col-form-label">Insira seu WhatsApp:</label>
+                <input type="text" class="form-control" id="recipient-phone">
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+            <button type="button" class="btn btn-success" onclick="enviarPedidoFinal()">Enviar Pedido</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <div id="root">
+        
+    </div>
+    <!-- !!! -->
+    
+
+
+    <!-- Load React. -->
+    <!-- Note: when deploying, replace "development.js" with "production.min.js". -->
+    <script src="https://unpkg.com/react@16/umd/react.production.min.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.production.min.js" crossorigin></script>
+
+
+    <!-- LOGICA DO SITE -->
+    <script type="text/javascript" src="ComprasActivity.js">
+        
+
+
+    </script>
+    <!-- !!! -->
+
+    <!-- jQuery (obrigatório para plugins JavaScript do Bootstrap) -->
+    <script src="jquery.slim.min.js" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="bootstrap.min.js" crossorigin="anonymous"></script>
+  </body>
+</html>

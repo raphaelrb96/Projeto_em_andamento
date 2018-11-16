@@ -4,6 +4,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    
     <title>FarmaFácil</title>
 
     <!-- Bootstrap -->
@@ -22,27 +23,90 @@
 
     <script src="/__/firebase/init.js"></script>
 
-
-
     <style type="text/css">
-
-        .botao-comprar {
-            width: 80%;
-            margin-top: 40px;
-            margin-bottom: 10px;
+        
+        #minipb {
+            visibility: hidden;
+            margin-bottom: 20px;
         }
 
-        .limite-card {
-            max-width: 400px;
+        .whatsbaner {
+            margin-top: 30px;
+            max-width: 500px;
+            width: 100%;
+            height: auto;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .vt-margin {
+            margin-top: 16px;
+            margin-bottom: 28px;
+        }
+
+        .vt-m-top {
+            margin-top: 10px;
         }
 
         .c-pointer {
             margin: 10px;
             cursor:pointer;
+            font-size: 50px;
         }
-        
+
+        .meus-botoes {
+            width: 80%;
+            margin-top: 10px;
+            margin-bottom: 15px;
+        }
+
+        .margem-50 {
+            margin-top: 20px;
+            margin-bottom: 20px
+        }
+
+       .vertical-alinhamento {
+
+            vertical-align: inherit;
+
+        }
+
+        .centro {
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .produto-img {
+            display: block;
+            margin: auto;
+            max-width: 100%;
+            height: auto;
+        }
+
+        .total {
+            font-style: italic;
+            font-size: 26px;
+        }
+
+        .bt-input-quantidade {
+            font-size: 30px;
+            width: 50px;
+            height: 50px;
+        }
+
+        .tv-quantidade {
+            font-size: 50px;
+        }
+
+        .preco-produto {
+            font-size: 34px;
+        }
+
         .meu-progress-bar {
-            margin-top: 100px;
+            margin-top: 30px;
+            margin-bottom: 20px;
             width: 50%;
             margin-left: auto;
             margin-right: auto;
@@ -52,66 +116,11 @@
             width: 75%;
         }
 
-        .title-produto {
-            font-size: 28px;
-        }
-
-        .preco-produto {
-            font-size: 26px;
-        }
-
-        .container-produto-img {
-            width: 250px;
-            height: 250px;
-            display: block;
+        .mini-progress-bar {
+            visibility: hidden;
             margin-left: auto;
             margin-right: auto;
-        }
-
-        .produto-img {
             display: block;
-            margin-left: auto;
-            margin-right: auto;
-            max-width: 100%;
-            width: auto;
-            height: auto;
-            max-height: 250px;
-        }
-
-        .vertical-alinhamento {
-
-            vertical-align: inherit;
-
-        }
-
-        .rendimensionar {
-            margin-top: 20px;
-            margin-bottom: 15px;
-            max-width: 70%;
-            height: auto;
-            display: block;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        .centro {
-            display: block;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        .card-produto {
-            margin-top: 10px;
-            margin-bottom: 6px;
-        }
-
-        .m-top-8px {
-            margin-top: 8px;
-        }
-
-        .sem-margim-bottom {
-            margin-bottom: 0px;
-            padding-bottom: 0px;
         }
 
     </style>
@@ -135,7 +144,7 @@
 
 
     <!-- LOGICA DO SITE -->
-    <script type="text/javascript" src="FarmaciaActivity.js">
+    <script type="text/javascript" src="DetalhesProduto.js">
         
 
 
